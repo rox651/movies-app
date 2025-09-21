@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Bun
+bun.lockb
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Env
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Build outputs
+**/dist/
+**/build/
+
+# Coverage
+coverage
+**/coverage/
+
+# Playwright/Jest/Vitest
+playwright-report
+playwright/.cache
+.vitest/
+**/.jest/
+
+# Drizzle
+server/drizzle/meta/

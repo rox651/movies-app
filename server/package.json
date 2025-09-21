@@ -1,0 +1,42 @@
+{
+	"name": "nodejs-movies-api",
+	"module": "index.ts",
+	"type": "commonjs",
+	"scripts": {
+		"dev": "bun run src/server.ts",
+		"build": "tsc",
+		"start": "node dist/server.js",
+		"lint": "biome lint --write",
+		"format": "biome format --write",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:coverage": "jest --coverage"
+	},
+	"private": true,
+	"devDependencies": {
+		"@biomejs/biome": "2.2.0",
+		"@types/bun": "latest",
+		"@types/express": "^5.0.3",
+		"@types/jest": "^30.0.0",
+		"@types/pg": "^8.15.5",
+		"drizzle-kit": "^0.31.4",
+		"jest": "^30.1.1",
+		"ts-jest": "^29.4.1"
+	},
+	"peerDependencies": {
+		"typescript": "^5.9.2"
+	},
+	"dependencies": {
+		"@trpc/server": "^11.5.1",
+		"cloudinary": "^2.7.0",
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.1",
+		"drizzle-orm": "^0.44.5",
+		"drizzle-valibot": "^0.4.2",
+		"express": "^5.1.0",
+		"multer": "^2.0.2",
+		"pg": "^8.16.3",
+		"pg-promise": "^11.15.0",
+		"valibot": "^1.1.0"
+	}
+}
