@@ -14,6 +14,7 @@
       "dev:be": "bun run --cwd server dev",
       "lint": "bun run --cwd frontend lint && bun run --cwd server lint",
       "format": "bun run --cwd frontend format && bun run --cwd server format",
-      "test": "bun run --cwd frontend test && bun run --cwd server test"
+      "test": "bun run --cwd frontend test && bun run --cwd server test",
+      "start": "bun run --cwd server start & bun run --cwd frontend preview"
    }
 }
