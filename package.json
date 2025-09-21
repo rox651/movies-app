@@ -1,19 +1,19 @@
 {
-  "name": "movies-app",
-  "private": true,
-  "version": "0.1.0",
-  "workspaces": [
-    "frontend",
-    "server"
-  ],
-  "packageManager": "bun@1.1.30",
-  "scripts": {
-    "build": "bun run --cwd frontend build && bun run --cwd server build",
-    "dev": "bun run -b --cwd server dev & bun run --cwd frontend dev",
-    "dev:fe": "bun run --cwd frontend dev",
-    "dev:be": "bun run --cwd server dev",
-    "lint": "bun run --cwd frontend lint && bun run --cwd server lint",
-    "format": "bun run --cwd frontend format && bun run --cwd server format",
-    "test": "bun run --cwd frontend test && bun run --cwd server test"
-  }
+   "name": "movies-app",
+   "private": true,
+   "version": "0.1.0",
+   "workspaces": [
+      "frontend",
+      "server"
+   ],
+   "packageManager": "bun@1.1.30",
+   "scripts": {
+      "build": "bun run --cwd frontend build && bun run --cwd server build",
+      "dev": "bun run -b --cwd server dev & bun run --cwd frontend dev",
+      "dev:fe": "bun run --cwd frontend dev",
+      "dev:be": "bun run --cwd server dev",
+      "lint": "bun run --cwd frontend lint && bun run --cwd server lint",
+      "format": "bun run --cwd frontend format && bun run --cwd server format",
+      "test": "bun run --cwd frontend test && bun run --cwd server test"
+   }
 }
