@@ -5,8 +5,14 @@ import dotenv from "dotenv";
 import { Pool } from "pg";
 import { PgTransaction } from "drizzle-orm/pg-core";
 import * as schema from "./tables";
+import path from "path";
+import fs from "fs";
 
 dotenv.config();
+const rootEnvPath = path.resolve(process.cwd(), "..", ".env");
+if (fs.existsSync(rootEnvPath)) {
+	dotenv.config({ path: rootEnvPath });
+}
 
 if (!process.env.DATABASE_URL) {
 	throw new Error("DATABASE_URL environment variable is not set");

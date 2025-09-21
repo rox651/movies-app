@@ -10,8 +10,14 @@ import uploadRoutes from "./presentation/http/uploadRoutes";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { appRouter } from "./presentation/trpc/routers/_app";
 import { createContext } from "./presentation/trpc/context";
+import path from "path";
+import fs from "fs";
 
 dotenv.config();
+const rootEnvPath = path.resolve(process.cwd(), "..", ".env");
+if (fs.existsSync(rootEnvPath)) {
+	dotenv.config({ path: rootEnvPath });
+}
 
 const app = express();
 const apiRouter = Router();
