@@ -1,14 +1,11 @@
 import preact from "@preact/preset-vite";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig } from "vite";
 import svgr from "vite-plugin-svgr";
-import csp from "vite-plugin-csp-guard";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
-
+export default defineConfig(() => {
   return {
     envDir: path.resolve(__dirname, ".."),
     plugins: [
@@ -19,21 +16,9 @@ export default defineConfig(({ mode }) => {
       preact(),
       tailwindcss(),
       svgr(),
-      csp({
-        policy: {
-          "default-src": ["'self'"],
-          "connect-src": ["'self'", env.VITE_API_URL || ""],
-          "style-src": ["'self'", "'unsafe-inline'"],
-        },
-      }),
     ],
     build: {
       assetsDir: "",
-      rollupOptions: {
-        output: {
-          entryFileNames: "chatbot.bundle.js",
-        },
-      },
     },
     resolve: {
       dedupe: ["preact"],
