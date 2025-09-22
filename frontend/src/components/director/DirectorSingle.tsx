@@ -9,9 +9,6 @@ export const DirectorSingle = ({ director }: DirectorSingleProps) => {
         {director.names}
         {director.lastnames ? ` ${director.lastnames}` : ""}
       </h1>
-      {director.biography ? (
-        <p className="text-sm leading-6">{director.biography}</p>
-      ) : null}
     </article>
   );
 };
