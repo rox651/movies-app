@@ -1,44 +1,37 @@
 import InputForm from "@/components/common/InputForm";
-import type { JSX } from "preact";
 import { useForm } from "react-hook-form";
 import { useCreateType } from "@/hooks/type/useCreateType";
 import { useUpdateType } from "@/hooks/type/useUpdateType";
 import TextareaForm from "@/components/common/TextareaForm";
-
-export type TypeFormValues = {
-  name: string;
-  description?: string;
-};
+import type { CreateTypeInput } from "@/domain/entities/type";
 
 type Props = {
-  defaultValues?: Partial<TypeFormValues> & { id?: number };
+  defaultValues?: Partial<CreateTypeInput>;
   submitLabel?: string;
 };
 
 const TypeForm = ({ defaultValues, submitLabel = "Save" }: Props) => {
-  const form = useForm<TypeFormValues>({
-    defaultValues: defaultValues as TypeFormValues,
+  const form = useForm<CreateTypeInput>({
+    defaultValues: defaultValues as CreateTypeInput,
   });
   const { register, handleSubmit, formState } = form;
   const { handleCreateType } = useCreateType();
   const { handleUpdateType } = useUpdateType();
 
-  const onSubmit = (values: TypeFormValues) => {
+  const onSubmit = (values: CreateTypeInput) => {
     if (defaultValues?.id) {
       handleUpdateType({ id: defaultValues.id, data: values });
     } else {
-      handleCreateType(values as any);
+      handleCreateType(values);
     }
   };
 
   return (
     <form
-      onSubmit={
-        ((e) => {
-          e.preventDefault();
-          handleSubmit(onSubmit)();
-        }) as JSX.SubmitEventHandler<HTMLFormElement>
-      }
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(onSubmit)();
+      }}
       className="space-y-4"
     >
       <InputForm

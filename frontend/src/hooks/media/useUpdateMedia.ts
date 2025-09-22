@@ -21,7 +21,7 @@ export const useUpdateMedia = () => {
 
       navigate({ to: "/media/$id", params: { id: String(id) } });
       toast.success("Media updated successfully");
-    } catch (e) {
+    } catch (_e) {
       toast.error("There was an error, try later");
     }
   };

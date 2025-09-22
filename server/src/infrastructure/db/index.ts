@@ -3,8 +3,7 @@ import type { NodePgQueryResultHKT } from "drizzle-orm/node-postgres";
 import type { ExtractTablesWithRelations } from "drizzle-orm";
 import dotenv from "dotenv";
 import { Pool } from "pg";
-import { PgTransaction } from "drizzle-orm/pg-core";
-import * as schema from "./tables";
+import type { PgTransaction } from "drizzle-orm/pg-core";
 import path from "path";
 import fs from "fs";
 

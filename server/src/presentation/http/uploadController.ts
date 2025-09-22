@@ -1,13 +1,11 @@
 import type { Request, Response } from "express";
+import "multer";
 import { cloudinary } from "../../infrastructure/cloudinary";
 
 export const uploadController = {
 	uploadImage: async (req: Request, res: Response) => {
 		try {
-			// Multer stores the file buffer on req.file
-			const file = (req as any).file as
-				| { buffer: Buffer; originalname: string }
-				| undefined;
+			const file = req.file as Express.Multer.File | undefined;
 			if (!file) {
 				res.status(400).json({ error: "File is required" });
 				return;

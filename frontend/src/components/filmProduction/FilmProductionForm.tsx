@@ -1,45 +1,37 @@
 import InputForm from "@/components/common/InputForm";
-import type { JSX } from "preact";
 import { useForm } from "react-hook-form";
 import { useCreateFilmProduction } from "@/hooks/filmProduction/useCreateFilmProduction";
 import { useUpdateFilmProduction } from "@/hooks/filmProduction/useUpdateFilmProduction";
 import TextareaForm from "@/components/common/TextareaForm";
-
-export type FilmProductionFormValues = {
-  name: string;
-  slogan?: string;
-  description?: string;
-};
+import type { CreateFilmProductionInput } from "@/domain/entities/filmProduction";
 
 type Props = {
-  defaultValues?: Partial<FilmProductionFormValues> & { id?: number };
+  defaultValues?: Partial<CreateFilmProductionInput>;
   submitLabel?: string;
 };
 
 const FilmProductionForm = ({ defaultValues, submitLabel = "Save" }: Props) => {
-  const form = useForm<FilmProductionFormValues>({
-    defaultValues: defaultValues as FilmProductionFormValues,
+  const form = useForm<CreateFilmProductionInput>({
+    defaultValues: defaultValues as CreateFilmProductionInput,
   });
   const { register, handleSubmit, formState } = form;
   const { handleCreateFilmProduction } = useCreateFilmProduction();
   const { handleUpdateFilmProduction } = useUpdateFilmProduction();
 
-  const onSubmit = (values: FilmProductionFormValues) => {
+  const onSubmit = (values: CreateFilmProductionInput) => {
     if (defaultValues?.id) {
       handleUpdateFilmProduction({ id: defaultValues.id, data: values });
     } else {
-      handleCreateFilmProduction(values as any);
+      handleCreateFilmProduction(values);
     }
   };
 
   return (
     <form
-      onSubmit={
-        ((e) => {
-          e.preventDefault();
-          handleSubmit(onSubmit)();
-        }) as JSX.SubmitEventHandler<HTMLFormElement>
-      }
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(onSubmit)();
+      }}
       className="space-y-4"
     >
       <InputForm

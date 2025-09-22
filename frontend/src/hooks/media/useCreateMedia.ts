@@ -19,7 +19,7 @@ export const useCreateMedia = () => {
 
       navigate({ to: "/media/$id", params: { id: String(id) } });
       toast.success("Media created successfully");
-    } catch (e) {
+    } catch (_e) {
       toast.error("There was an error, try later");
     }
   };

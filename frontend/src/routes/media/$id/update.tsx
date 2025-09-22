@@ -10,6 +10,7 @@ const UpdateMediaPage = () => {
   const { id } = Route.useParams();
   const numericId = Number(id);
   const { data } = useGetMediaById({ id: numericId });
+  const { mutation } = useUpdateMedia();
 
   if (!data) {
     return <div>Media not found</div>;
@@ -29,8 +30,6 @@ const UpdateMediaPage = () => {
       (filmProduction) => filmProduction.id,
     ),
   };
-
-  const { mutation } = useUpdateMedia();
 
   return (
     <section className="max-w-xl mx-auto">

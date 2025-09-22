@@ -1,44 +1,37 @@
 import InputForm from "@/components/common/InputForm";
-import type { JSX } from "preact";
 import { useForm } from "react-hook-form";
 import { useCreateGenre } from "@/hooks/genre/useCreateGenre";
 import { useUpdateGenre } from "@/hooks/genre/useUpdateGenre";
 import TextareaForm from "@/components/common/TextareaForm";
-
-export type GenreFormValues = {
-  name: string;
-  description?: string;
-};
+import type { CreateGenreInput } from "@/domain/entities/genre";
 
 type Props = {
-  defaultValues?: Partial<GenreFormValues> & { id?: number };
+  defaultValues?: Partial<CreateGenreInput>;
   submitLabel?: string;
 };
 
 const GenreForm = ({ defaultValues, submitLabel = "Save" }: Props) => {
-  const form = useForm<GenreFormValues>({
-    defaultValues: defaultValues as GenreFormValues,
+  const form = useForm<CreateGenreInput>({
+    defaultValues: defaultValues as CreateGenreInput,
   });
   const { register, handleSubmit, formState } = form;
   const { handleCreateGenre } = useCreateGenre();
   const { handleUpdateGenre } = useUpdateGenre();
 
-  const onSubmit = (values: GenreFormValues) => {
+  const onSubmit = (values: CreateGenreInput) => {
     if (defaultValues?.id) {
       handleUpdateGenre({ id: defaultValues.id, data: values });
     } else {
-      handleCreateGenre(values as any);
+      handleCreateGenre(values);
     }
   };
 
   return (
     <form
-      onSubmit={
-        ((e) => {
-          e.preventDefault();
-          handleSubmit(onSubmit)();
-        }) as JSX.SubmitEventHandler<HTMLFormElement>
-      }
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(onSubmit)();
+      }}
       className="space-y-4"
     >
       <InputForm
