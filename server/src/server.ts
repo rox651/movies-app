@@ -46,6 +46,27 @@ app.use(
 	}),
 );
 
+// Serve frontend build if present
+const candidateClientPaths = [
+	path.resolve(__dirname, "../../frontend/dist"),
+	path.resolve(process.cwd(), "../frontend/dist"),
+	path.resolve(process.cwd(), "frontend/dist"),
+];
+console.log("Frontend dist candidates:", candidateClientPaths);
+const clientDistPath = candidateClientPaths.find((p) => fs.existsSync(p));
+if (clientDistPath) {
+	console.log("Serving frontend from:", clientDistPath);
+	app.use(express.static(clientDistPath));
+	// Regex fallback: serve index.html for any route that is not /api or /trpc
+	app.get(/^(?!\/(api|trpc)(\/|$)).*/, (_req, res) => {
+		res.sendFile(path.join(clientDistPath, "index.html"));
+	});
+} else {
+	console.warn(
+		"frontend/dist not found. Skipping static frontend. Did the build step run?",
+	);
+}
+
 const PORT = process.env.PORT ?? 3000;
 
 app.listen(PORT, () =>
